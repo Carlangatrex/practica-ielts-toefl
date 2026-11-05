@@ -1,0 +1,10 @@
+Práctica IELTS y TOEFL (PWA)
+
+Archivos: index.html, manifest.webmanifest, sw.js, icon-192.png, icon-512.png
+
+Cómo publicarla (gratis):
+1. Netlify Drop: entra a app.netlify.com/drop y arrastra la carpeta con estos 5 archivos.
+2. O súbelos a un repositorio de GitHub y activa GitHub Pages.
+3. Abre la dirección https en el celular y elige "Instalar app" (Android) o "Añadir a pantalla de inicio" (iPhone).
+
+La app necesita abrirse una vez con internet; después funciona sin conexión.

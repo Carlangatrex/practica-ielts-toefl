@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#3b4cca">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="IELTS·TOEFL">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Práctica IELTS y TOEFL</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{--bg:#f3f5fa;--card:#fff;--fg:#14213d;--mut:#5a6785;--bd:#d6dcec;--acc:#3b4cca;--accfg:#fff;--ok:#1f8a5b;--okbg:#e3f4ec;--bad:#c2410c;--badbg:#fdebe2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1424;--card:#182038;--fg:#e8ecf8;--mut:#9aa6c6;--bd:#2c3659;--acc:#8c9bff;--accfg:#0f1424;--ok:#52d19b;--okbg:#123326;--bad:#ff9c6e;--badbg:#3a1f12}}
+:root[data-theme="dark"]{--bg:#0f1424;--card:#182038;--fg:#e8ecf8;--mut:#9aa6c6;--bd:#2c3659;--acc:#8c9bff;--accfg:#0f1424;--ok:#52d19b;--okbg:#123326;--bad:#ff9c6e;--badbg:#3a1f12}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+h1{font:600 26px/1.2 "Source Serif 4",Georgia,serif;margin:0 0 4px}
+.sub{color:var(--mut);margin:0 0 16px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px}
+.tile{display:block;width:100%;text-align:left;margin:0 0 10px;padding:14px 16px;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:12px;font:inherit;cursor:pointer}
+.tile b{display:block;font:600 19px "Source Serif 4",Georgia,serif}.tile span{color:var(--mut);font-size:13px}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.back{background:none;border:0;color:var(--acc);font:inherit;padding:0 0 12px;cursor:pointer}
+.chips{display:flex;gap:8px;margin-bottom:14px}
+.chip{flex:1;padding:9px 0;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:10px;font:inherit;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--acc);color:var(--accfg);border-color:var(--acc)}
+.meta{display:flex;justify-content:space-between;color:var(--mut);font-size:13px;margin-bottom:10px}
+.pass{font:400 16px/1.65 "Source Serif 4",Georgia,serif;margin:0 0 14px;padding:12px 14px;background:var(--bg);border-radius:10px;max-height:34vh;overflow:auto}
+.q{font:400 21px/1.5 "Source Serif 4",Georgia,serif;margin:0 0 16px}
+.gap{display:inline-block;min-width:4.5em;border-bottom:2px solid var(--acc);text-align:center;padding:0 4px}
+.gap.ok{color:var(--ok);border-color:var(--ok)}.gap.bad{color:var(--bad);border-color:var(--bad)}
+.opt{display:block;width:100%;text-align:left;margin:0 0 9px;padding:12px 14px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);border-radius:10px;font:inherit;cursor:pointer}
+.opt.ok{background:var(--okbg);border-color:var(--ok)}.opt.bad{background:var(--badbg);border-color:var(--bad)}.opt:disabled{cursor:default;color:var(--fg)}
+.why{margin:12px 0 0;padding:12px 14px;border-left:3px solid var(--acc);background:var(--bg);font-size:14px;border-radius:0 8px 8px 0}
+.go{margin-top:12px;width:100%;padding:12px;border:0;border-radius:10px;background:var(--acc);color:var(--accfg);font:600 16px system-ui,sans-serif;cursor:pointer}
+.go.alt{background:var(--bg);color:var(--fg);border:1px solid var(--bd)}
+.big{font:600 52px/1 "Source Serif 4",Georgia,serif;margin:6px 0 8px}
+.clock{font:600 44px/1 "Source Serif 4",Georgia,serif;margin:8px 0}
+textarea{width:100%;min-height:210px;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--fg);font:inherit;resize:vertical}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:15px}
+</style>
+</head>
+<body>
+<main><h1>Práctica IELTS y TOEFL</h1><p class="sub" id="sub">Elige una sección. Las explicaciones están en español.</p><div id="app"></div></main>
+<script>
+const P="Urban beekeeping has expanded rapidly over the past decade, with hives now appearing on the roofs of offices, hotels and hospitals. Supporters argue that city bees benefit from the variety of flowers in parks and gardens, which can offer a longer foraging season than monoculture farmland. Critics, however, warn that an excess of managed hives may compete with wild pollinators for limited resources. A recent survey of one European capital found that honeybee numbers had doubled in five years, while several native species declined. Researchers stress that the data do not prove a causal link, and they call for further study before any restrictions are introduced.";
+const L="Welcome to the library orientation. The main reading room is on the second floor and is open until ten every weeknight. Borrowing limits have changed this semester: undergraduates may now take out ten books for four weeks, while postgraduates may borrow twenty. If an item is overdue, a fine of fifty cents per day applies, but the first three days are free. Study rooms must be booked online, and a booking is cancelled automatically if nobody arrives within fifteen minutes.";
+const P2="Researchers have long suspected that sleep plays a role in memory, but the mechanism remained unclear. In a recent experiment, volunteers learned a list of word pairs and were then divided into two groups: one slept for eight hours, while the other stayed awake. When tested twelve hours later, the group that slept recalled significantly more pairs. The scientists propose that, during deep sleep, the brain replays recent experiences, strengthening the connections between neurons. Nevertheless, they caution that the sample was small and consisted entirely of university students.";
+const P3="The Svalbard Global Seed Vault, built into a mountain on a remote Norwegian island, stores duplicate samples of crop seeds from around the world. It opened in 2008 and is designed to withstand natural disasters and equipment failure. Although the vault is owned by the Norwegian government, the seeds remain the property of the countries or institutions that deposit them. In 2015, the vault was opened for the first time to retrieve samples, after conflict damaged a seed bank in the Middle East.";
+const L2="Today we’ll look at the concept of opportunity cost. Imagine you have a free evening and can either study or work an extra shift. If you choose to work, the money you earn is your gain, but the study time you give up is the opportunity cost. Economists stress that this cost is not always financial. For example, a government that spends its budget on a new stadium cannot use the same money to build schools. Next week, we’ll apply this idea to national budgets.";
+const L3="Thanks for calling the language exchange club. We meet every Thursday at six in the student café, and the fee is twelve dollars per term. You only need to bring a notebook. On the last Thursday of each month we hold a quiz night, and the next one is on the twenty-eighth. You can pay at the first session, but we only accept card payments, not cash.";
+const TFN=["True","False","Not Given"];
+const S={
+grammar:{t:"Use of English",d:"Gramática y vocabulario C1·C2",set:[
+{q:"Not only ___ the deadline, but she also exceeded every target.",o:["she met","did she meet","she did meet","had she met"],a:1,w:"Con “Not only” al inicio hay inversión: auxiliar + sujeto + verbo base."},
+{q:"Had I known about the delay, I ___ earlier.",o:["would leave","would have left","will have left","had left"],a:1,w:"“Had I known” = If I had known (tercer condicional invertido), así que sigue would have + participio."},
+{q:"The committee insisted that he ___ the report by Friday.",o:["submits","submitted","submit","is submitting"],a:2,w:"Tras insist, demand o recommend se usa el subjuntivo: forma base del verbo."},
+{q:"I’d rather you ___ me about it yesterday.",o:["tell","told","had told","would tell"],a:2,w:"Para lamentar algo pasado: would rather + sujeto + past perfect."},
+{q:"Little ___ that the project would change her career.",o:["she knew","did she know","she did know","knew she"],a:1,w:"“Little” con sentido negativo al inicio obliga a invertir: did she know."},
+{q:"The minister’s remarks were deliberately ___, leaving journalists unsure of his position.",o:["equivocal","emphatic","candid","categorical"],a:0,w:"Equivocal = ambiguo a propósito. Las otras opciones significan claro o directo."},
+{q:"___ the weather, the match went ahead.",o:["Despite of","Although","Notwithstanding","Even though"],a:2,w:"Notwithstanding es preposición formal (= a pesar de). “Despite” no lleva “of”; although y even though piden una cláusula."},
+{q:"She suggested ___ the meeting to Monday.",o:["to move","moving","to moving","move"],a:1,w:"Suggest se construye con gerundio (moving) o con that + subjuntivo."},
+{q:"Rarely ___ such a persuasive argument in a debate.",o:["I have heard","have I heard","I heard","did I heard"],a:1,w:"Los adverbios negativos (Rarely, Seldom, Hardly) al inicio piden inversión: auxiliar + sujeto."},
+{q:"If it ___ for her support, the project would have collapsed.",o:["weren’t","hadn’t been","wasn’t","didn’t be"],a:1,w:"“If it hadn’t been for” es tercer condicional y equivale a “de no ser por”."},
+{q:"The report, ___ findings surprised everyone, was published last week.",o:["which","whose","that","of which the"],a:1,w:"Whose indica posesión (los hallazgos del informe) y va seguido directamente del sustantivo."},
+{q:"He denied ___ the document.",o:["to have seen","having seen","see","to see"],a:1,w:"Deny va seguido de gerundio (denied having seen)."},
+{q:"It’s high time we ___ a decision.",o:["make","made","will make","are making"],a:1,w:"“It’s high time + sujeto” se usa con pasado simple, aunque se refiera al presente."},
+{q:"The two proposals are ___ incompatible; adopting one rules out the other.",o:["mutually","reciprocally","jointly","commonly"],a:0,w:"Colocación fija: mutually exclusive o mutually incompatible."},
+{q:"Hardly had she sat down ___ the phone rang.",o:["than","when","as","then"],a:1,w:"Hardly y scarcely van con when; no sooner va con than."},
+{q:"She was ___ to the idea of moving abroad, though she eventually agreed.",o:["averse","adverse","opposite","avert"],a:0,w:"Averse to = reacio a. No confundir con adverse, que significa perjudicial."}]},
+reading:{t:"Reading",d:"Verdadero / Falso / No dado (IELTS) y opción múltiple (TOEFL)",pass:P,fix:1,set:[
+{q:"Hives can now be found on the roofs of some hospitals.",o:TFN,a:0,w:"El texto lo dice de forma directa: hives appear on roofs of offices, hotels and hospitals."},
+{q:"Honeybee numbers doubled in every European capital.",o:TFN,a:1,w:"El texto habla de una sola capital, no de todas. Es False."},
+{q:"Urban beekeepers earn more than rural ones.",o:TFN,a:2,w:"El texto no menciona ingresos. En IELTS esto es Not Given: no se puede confirmar ni negar."},
+{q:"What do the researchers say about the decline of native species?",o:["Managed hives caused it","The evidence does not yet establish a cause","Parks lack enough flowers","It is limited to rooftops"],a:1,w:"“The data do not prove a causal link” significa que aún no hay evidencia de causa."},
+{q:"The word “excess” in the passage is closest in meaning to",o:["surplus","absence","variety","benefit"],a:0,w:"An excess of hives = demasiadas colmenas, un excedente (surplus)."},
+{pass:P2,q:"According to the passage, what happened to the volunteers who slept?",o:["They learned more word pairs","They remembered more word pairs later","They slept for twelve hours","They forgot fewer faces"],a:1,w:"El texto dice que el grupo que durmió recordó significativamente más pares de palabras."},
+{pass:P2,q:"The word “mechanism” in the passage is closest in meaning to",o:["process","machine","result","theory"],a:0,w:"Aquí mechanism no es un aparato, sino el proceso por el cual algo ocurre."},
+{pass:P2,q:"Why do the scientists urge caution?",o:["The test was too long","The group studied was small and limited","The volunteers did not sleep well","The word list was too easy"],a:1,w:"Advierten que la muestra era pequeña y formada solo por universitarios."},
+{pass:P2,q:"The experiment lasted several weeks.",o:TFN,a:2,w:"El texto da las horas de sueño y de prueba, pero no la duración total. Es Not Given."},
+{pass:P3,q:"The vault began operating in 2008.",o:TFN,a:0,w:"El texto afirma que el vault opened in 2008."},
+{pass:P3,q:"The Norwegian government owns the seeds stored in the vault.",o:TFN,a:1,w:"El texto aclara que el gobierno es dueño de la bóveda, pero las semillas siguen siendo de quienes las depositan."},
+{pass:P3,q:"The vault has been opened more than once to retrieve samples.",o:TFN,a:2,w:"Solo se menciona la apertura de 2015 como la primera vez. No se dice si hubo otras: Not Given."},
+{pass:P3,q:"A seed bank in the Middle East was damaged by conflict.",o:TFN,a:0,w:"El texto lo indica de forma directa."}]},
+listening:{t:"Listening",d:"Escucha un audio breve y responde",script:L,fix:0,set:[
+{q:"How many books can undergraduates borrow?",o:["Five","Ten","Fifteen","Twenty"],a:1,w:"El audio dice que los estudiantes de pregrado pueden llevar ten books por cuatro semanas."},
+{q:"When does the overdue fine begin?",o:["Immediately","After three days","After fifteen minutes","After four weeks"],a:1,w:"“The first three days are free”, así que la multa empieza después de tres días."},
+{q:"What happens if a student is fifteen minutes late for a booked study room?",o:["A fine applies","The booking is cancelled","The room is moved","Nothing happens"],a:1,w:"La reserva se cancela automáticamente si nadie llega en quince minutos."},
+{script:L2,q:"What is the main topic of the lecture?",o:["Budget planning for students","The idea of opportunity cost","How to choose a career","Government spending on stadiums"],a:1,w:"Es la idea principal: el profesor presenta el concepto de opportunity cost."},
+{script:L2,q:"What is the opportunity cost of working an extra shift?",o:["The money earned","The tax paid","The study time given up","The travel time"],a:2,w:"El dinero es la ganancia; el costo de oportunidad es el tiempo de estudio al que se renuncia."},
+{script:L2,q:"Which example involves a government?",o:["Building a stadium instead of schools","Raising taxes","Lowering interest rates","Funding research"],a:0,w:"El ejemplo es gastar el presupuesto en un estadio en lugar de construir escuelas."},
+{script:L3,q:"When does the club meet?",o:["Tuesday at six","Thursday at six","Thursday at eight","Saturday at ten"],a:1,w:"Se reúnen cada jueves a las seis en la cafetería."},
+{script:L3,q:"How much is the fee?",o:["Ten dollars","Twelve dollars","Fifteen dollars","Twenty dollars"],a:1,w:"Cuidado con twelve y twenty, que suenan parecido. La cuota es de doce dólares."},
+{script:L3,q:"How can members pay?",o:["Cash only","Card only","Cash or card","Online transfer"],a:1,w:"“We only accept card payments, not cash”: solo tarjeta."},
+{script:L3,q:"When is the next quiz night?",o:["The twentieth","The twenty-eighth","The last Friday","The first Thursday"],a:1,w:"La noche de preguntas es el último jueves del mes, y la próxima es el veintiocho."}]}};
+const W={IELTS:{min:40,words:250,pr:["Some people believe universities should focus on practical skills for employment, while others think academic knowledge is more important. Discuss both views and give your opinion.","In many countries, people are working longer hours than before. What are the causes, and is this a positive or negative development?","Some people think children should start school at a very early age. Others believe they should not begin until they are older. Discuss both views and give your opinion.","Technology is making people less able to communicate face to face. To what extent do you agree or disagree?"]},
+TOEFL:{min:10,words:100,pr:["Your professor asks: Should schools replace printed textbooks with digital materials? Write a post for the class discussion, giving your opinion and supporting it with reasons.","Is remote work better for productivity than working in an office? Contribute to the class discussion with your view and reasons.","A student argues that universities should require all students to study a foreign language. Do you agree? Add your view to the discussion.","Should cities ban private cars from their centers? Share your opinion and give reasons."]}};
+const K={IELTS:{prep:60,talk:120,pr:["Describe a skill you learned that has been useful to you. You should say what the skill is, how you learned it, and why it has been useful.","Describe a place where you like to relax. You should say where it is, what you do there, and why it helps you relax.","Describe a teacher who influenced you. You should say who the person was, what they taught you, and why they were important.","Describe a book you have read recently. You should say what it was about, why you chose it, and whether you would recommend it."]},
+TOEFL:{prep:15,talk:45,pr:["Some people prefer to study alone, others in groups. Which do you prefer and why?","Do you agree that students should take a course in financial literacy? Explain your opinion.","Some people think it is better to live in the city, others in the countryside. Which do you prefer and why?","Is it more important to be good at teamwork or to work independently? Explain your view."]}};
+const app=document.getElementById("app"),sub=document.getElementById("sub");
+let sec,pool,i,score,done,ex="IELTS",tm=null;
+const $=s=>document.querySelector(s);
+const sh=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const pick1=a=>a[Math.floor(Math.random()*a.length)];
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function stop(){if(tm){clearInterval(tm);tm=null}try{speechSynthesis.cancel()}catch(e){}}
+function bestGet(k){try{return +localStorage.getItem("ie_"+k)||0}catch(e){return 0}}
+function bestSet(k,p){try{if(p>bestGet(k))localStorage.setItem("ie_"+k,String(p))}catch(e){}}
+function home(){stop();sub.textContent="Elige una sección. Las explicaciones están en español.";
+ const rows=[["grammar",S.grammar],["reading",S.reading],["listening",S.listening]].map(([k,v])=>`<button class="tile" data-k="${k}"><b>${v.t}</b><span>${v.d}${bestGet(k)?" · mejor marca "+bestGet(k)+"%":""}</span></button>`).join("");
+ app.innerHTML=rows+`<button class="tile" data-k="writing"><b>Writing</b><span>Ensayo con cronómetro y contador de palabras</span></button><button class="tile" data-k="speaking"><b>Speaking</b><span>Tiempo de preparación y de respuesta</span></button>`;
+ app.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{const k=b.dataset.k;k==="writing"?writing():k==="speaking"?speaking():quiz(k)})}
+function back(){return `<button class="back" id="bk">← Volver</button>`}
+function bindBack(){$("#bk").onclick=home}
+function quiz(k){stop();sec=k;const d=S[k];pool=d.set.map(x=>({...x,c:x.o[x.a],o:d.fix?x.o:sh(x.o)}));if(k==="grammar")pool=sh(pool);i=0;score=0;render()}
+function render(){const d=S[sec];
+ if(i>=pool.length){const p=Math.round(score/pool.length*100);bestSet(sec,p);
+  app.innerHTML=back()+`<div class="card"><p class="sub">${d.t}</p><div class="big">${score}/${pool.length}</div><p class="sub">${p}% de aciertos. Mejor marca: ${bestGet(sec)}%.</p><button class="go" id="again">Practicar de nuevo</button></div>`;
+  bindBack();$("#again").onclick=()=>quiz(sec);return}
+ const x=pool[i];done=false;const parts=x.q.split("___");
+ let top="";
+ const ps=x.pass||d.pass,sc=x.script||d.script;
+ if(ps)top=`<div class="pass">${ps}</div>`;
+ if(sc)top=`<button class="go alt" id="play" style="margin:0 0 14px">▶ Escuchar audio</button><div id="tr"></div>`;
+ app.innerHTML=back()+`<div class="meta"><span>${d.t} · pregunta ${i+1} de ${pool.length}</span></div><div class="card">${top}<p class="q">${x.q.includes("___")?parts[0]+'<span class="gap" id="gap">&nbsp;</span>'+(parts[1]||""):x.q}</p><div id="opts"></div><div id="fb"></div></div>`;
+ bindBack();
+ if(sc)$("#play").onclick=()=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(sc);u.lang="en-US";u.rate=.95;speechSynthesis.speak(u)}catch(e){$("#tr").innerHTML=`<p class="pass">Tu navegador no reproduce audio. Transcripción: ${sc}</p>`}};
+ x.o.forEach(t=>{const b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>ans(b,t);$("#opts").appendChild(b)})}
+function ans(btn,t){if(done)return;done=true;const x=pool[i],ok=t===x.c,g=$("#gap");if(ok)score++;
+ if(g){g.textContent=x.c;g.className="gap "+(ok?"ok":"bad")}
+ document.querySelectorAll(".opt").forEach(b=>{b.disabled=true;if(b.textContent===x.c)b.classList.add("ok");else if(b===btn)b.classList.add("bad")});
+ const last=i===pool.length-1;
+ $("#fb").innerHTML=`<p class="why"><strong>${ok?"Correcto.":"Casi."}</strong> ${x.w}</p><button class="go" id="nx">${last?"Ver resultado":"Siguiente"}</button>`;
+ $("#nx").onclick=()=>{i++;render()}}
+function exChips(fn){return `<div class="chips">${["IELTS","TOEFL"].map(n=>`<button class="chip" data-e="${n}" aria-pressed="${n===ex}">${n}</button>`).join("")}</div>`}
+function bindChips(fn){app.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{ex=b.dataset.e;fn()})}
+function checklist(items){return `<div class="card" style="margin-top:12px"><p class="sub" style="margin-bottom:6px">Revisa tu respuesta</p>${items.map(t=>`<label class="ck"><input type="checkbox"> ${t}</label>`).join("")}<p class="sub" style="margin:10px 0 0">Si quieres, pega tu texto en el chat y te lo corrijo con explicaciones en español.</p></div>`}
+function writing(){stop();const c=W[ex],pr=pick1(c.pr);sub.textContent="Writing · "+ex;
+ app.innerHTML=back()+exChips()+`<div class="card"><p class="q" style="font-size:18px">${pr}</p><p class="sub">Tiempo: ${c.min} min · mínimo ${c.words} palabras</p><div class="clock" id="clk">${fmt(c.min*60)}</div><button class="go" id="st">Empezar</button><textarea id="tx" placeholder="Escribe tu respuesta aquí" style="margin-top:12px"></textarea><p class="sub" id="wc" style="margin:6px 0 0">0 palabras</p></div><div id="ck"></div>`;
+ bindBack();bindChips(writing);
+ $("#tx").oninput=e=>{const n=(e.target.value.trim().match(/\S+/g)||[]).length;$("#wc").textContent=n+" palabras"+(n>=c.words?" · meta alcanzada":"")};
+ $("#st").onclick=()=>{stop();let s=c.min*60;$("#st").textContent="Reiniciar";tm=setInterval(()=>{s--;$("#clk").textContent=fmt(Math.max(s,0));if(s<=0){stop();$("#ck").innerHTML=checklist(["Tesis clara en la introducción","Un ejemplo concreto por cada idea","Conectores variados","Revisé gramática y ortografía"])}},1000)}}
+function speaking(){stop();const c=K[ex],pr=pick1(c.pr);sub.textContent="Speaking · "+ex;
+ app.innerHTML=back()+exChips()+`<div class="card"><p class="q" style="font-size:18px">${pr}</p><p class="sub">Preparación: ${c.prep} s · Respuesta: ${c.talk} s</p><p class="sub" id="ph">Listo para empezar</p><div class="clock" id="clk">${fmt(c.prep)}</div><button class="go" id="st">Empezar</button></div><div id="ck"></div>`;
+ bindBack();bindChips(speaking);
+ $("#st").onclick=()=>{stop();let phase=0,s=c.prep;$("#ph").textContent="Prepara tu respuesta";$("#clk").textContent=fmt(s);
+  tm=setInterval(()=>{s--;$("#clk").textContent=fmt(Math.max(s,0));if(s<=0){if(phase===0){phase=1;s=c.talk;$("#ph").textContent="Habla ahora, en voz alta";$("#clk").textContent=fmt(s)}else{stop();$("#ph").textContent="Tiempo terminado";$("#ck").innerHTML=checklist(["Hablé sin parar hasta el final","Di al menos un ejemplo personal","Usé distintos tiempos verbales"])}}},1000)}}
+home();
+</script>
+<script>if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
+</body>
+</html>
